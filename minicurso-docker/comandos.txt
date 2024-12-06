@@ -1,0 +1,50 @@
+1. Executar um comando dentro de um container:
+
+docker exec -it <nome_container> <comando>
+
+    -it: interativo e terminal
+    <nome_container>: nome do container onde o comando será executado
+    <comando>: comando a ser executado dentro do container
+
+2. Criar um container a partir de uma imagem:
+
+docker run -d --name <nome_container> -v <volume>:/app/data <imagem>
+
+    --name <nome_container>: nome do container a ser criado
+    -d: executa o container em segundo plano (detached) -t
+    -v <volume>:/app/data: monta o volume <volume> no diretório /app/data dentro do container
+    <imagem>: a imagem que será usada para criar o container
+
+3. Remover (matar) um container:
+
+docker rm -f <nome_container>
+
+    -f: força a remoção do container, mesmo que esteja em execução
+
+4. Construir uma imagem Docker a partir de um Dockerfile:
+
+docker build -t <nome_imagem> .
+
+    -t <nome_imagem>: nome para a imagem gerada
+    .: diretório onde o Dockerfile está localizado (geralmente o diretório atual)
+
+5. Criar um volume Docker:
+
+docker volume create <nome_volume>
+
+    <nome_volume>: nome do volume a ser criado
+
+6. Limpar volumes não utilizados:
+
+docker volume prune
+
+7. Limpar imagens não utilizadas:
+
+docker image prune
+
+8. Limpar todos os recursos não utilizados (volumes, imagens, containers):
+
+docker system prune
+
+docker network create my_network
+docker run -p 60:5000 --name container_flask -v .:/app --network my_network flask_imagem

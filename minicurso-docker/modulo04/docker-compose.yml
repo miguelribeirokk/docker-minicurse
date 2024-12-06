@@ -1,0 +1,26 @@
+services:
+    postgres:
+      image: postgres:16
+      container_name: my_postgres
+      environment:
+        POSTGRES_USER: meu_usuario
+        POSTGRES_PASSWORD: minha_senha
+        POSTGRES_DB: meu_banco
+      networks:
+        - my_network
+
+    python_client:
+      build:
+        context: .
+      container_name: python_client
+      depends_on:
+        - postgres
+      ports:
+        - "60:5000"
+      networks:
+        - my_network
+      volumes:
+        - .:/app
+networks:
+  my_network:
+    driver: bridge
